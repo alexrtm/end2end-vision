@@ -1,0 +1,35 @@
+[project]
+name = "end2end-vision"
+version = "0.1.0"
+description = "Train, benchmark, and deploy a Vision Transformer (ViT) and a ResNet on a real dataset (TinyImageNet), then build a deployment + monitoring pipeline."
+authors = [
+    {name = "Alex Myers",email = "alexrtm14@gmail.com"}
+]
+readme = "README.md"
+
+# We need to specify <3.14 because triton 3.4.0, a necessary dependency of torch 2.8.0, is not compatible with python >=3.14. 
+# Otherwise we need to constrain the version of torch
+requires-python = ">=3.13,<3.14" 
+
+dependencies = [
+    "torch (>=2.8.0,<3.0.0)",
+    "torchvision (>=0.23.0,<0.24.0)",
+    "datasets (>=4.0.0,<5.0.0)",
+    "pandas (>=2.3.2,<3.0.0)",
+    "jupyter (>=1.1.1,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu129"
+priority = "explicit"
+
+
+[tool.poetry.dependencies]
+torch = {source = "pytorch"}
+torchvision = {source = "pytorch"}
